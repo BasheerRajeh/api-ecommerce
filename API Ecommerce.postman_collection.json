@@ -1,0 +1,5413 @@
+{
+	"info": {
+		"_postman_id": "97988a2b-42fd-4609-aa9f-6e6e2974a6b5",
+		"name": "API Ecommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18660780"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('accessToken', pm.response.json().tokens.access.token)\r",
+									"pm.environment.set('refreshToken', pm.response.json().tokens.refresh.token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"basheer.s.rajeh@gmail.com\",\r\n    \"password\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/login",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1395"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"573-V0SLyErD0gGzPRQEyyX3eoRlKFY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 16 Jul 2023 03:39:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"success\",\n    \"statusCode\": 200,\n    \"message\": \"You have been logged in successfully\",\n    \"user\": {\n        \"_id\": \"64a0e27b25f40927944f412a\",\n        \"firstName\": \"Admin\",\n        \"lastName\": \"Admin\",\n        \"email\": \"admin@admin.com\",\n        \"role\": \"Admin\",\n        \"isEmailVerified\": true,\n        \"isDeleted\": false,\n        \"createdAt\": \"2023-07-02T02:35:39.438Z\",\n        \"updatedAt\": \"2023-07-02T02:35:39.438Z\"\n    },\n    \"tokens\": {\n        \"access\": {\n            \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiX2lkIjoiNjRhMGUyN2IyNWY0MDkyNzk0NGY0MTJhIiwiZmlyc3ROYW1lIjoiQWRtaW4iLCJsYXN0TmFtZSI6IkFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiQWRtaW4iLCJpc0VtYWlsVmVyaWZpZWQiOnRydWUsImlzRGVsZXRlZCI6ZmFsc2UsImNyZWF0ZWRBdCI6IjIwMjMtMDctMDJUMDI6MzU6MzkuNDM4WiIsInVwZGF0ZWRBdCI6IjIwMjMtMDctMDJUMDI6MzU6MzkuNDM4WiJ9LCJpYXQiOjE2ODk0Nzg3NzAsImV4cCI6MTY4OTQ4MDU3MCwidHlwZSI6ImFjY2VzcyJ9.dxtUd7OYDzlwoQPJwGiyabXoXrw09ZPhmETjhLyMOf4\",\n            \"expires\": \"2023-07-16T04:09:30.217Z\"\n        },\n        \"refresh\": {\n            \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiX2lkIjoiNjRhMGUyN2IyNWY0MDkyNzk0NGY0MTJhIiwiZmlyc3ROYW1lIjoiQWRtaW4iLCJsYXN0TmFtZSI6IkFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiQWRtaW4iLCJpc0VtYWlsVmVyaWZpZWQiOnRydWUsImlzRGVsZXRlZCI6ZmFsc2UsImNyZWF0ZWRBdCI6IjIwMjMtMDctMDJUMDI6MzU6MzkuNDM4WiIsInVwZGF0ZWRBdCI6IjIwMjMtMDctMDJUMDI6MzU6MzkuNDM4WiJ9LCJpYXQiOjE2ODk0Nzg3NzAsImV4cCI6MTY5MDA4MzU3MCwidHlwZSI6InJlZnJlc2gifQ.BiGkm-FXpy7LYKaad0hVYkXiHPXt-tAdXxTp934VXX0\",\n            \"expires\": \"2023-07-23T03:39:30.221Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Error: Wrong Credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"admin1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/login",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "84"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"54-rlBqJmRyPwb8kNBG3gnJmFACsBU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 16 Jul 2023 04:49:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 401,\n    \"type\": \"HttpException\",\n    \"message\": \"Your credentials are not valid\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('accessToken', pm.response.json().tokens.access.token)\r",
+									"pm.environment.set('refreshToken', pm.response.json().tokens.refresh.token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "ar_MX",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Basheer\",\r\n    \"lastName\": \"Rajeh\",\r\n    \"email\": \"basheer.s.rajeh@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"role\": \"User\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Error: User Exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "ar_MX",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Mahmoud\",\r\n    \"lastName\": \"Rajeh\",\r\n    \"email\": \"basheer.s.rajeh@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"role\": \"User\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/register",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-6lY97PeH7thbsecWQBT9g8mDkVo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Jul 2023 06:23:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 400,\n    \"type\": \"HttpException\",\n    \"message\": \"User already exists\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\": \"{{refreshToken}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/logout",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"refreshToken\": \"{{refreshToken}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/logout",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "85"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"55-hnVmOvfz12vEPmm//RDdNEcTkl0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Jul 2023 06:26:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"statusCode\": 200,\n    \"message\": \"You have been logged out successfully\"\n}"
+						},
+						{
+							"name": "Error: Token Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"refreshToken\": \"{{refreshToken}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/logout",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4d-l8JupggKMdDIEZn1PBWkFtOjL+Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Jul 2023 06:26:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"type\": \"HttpException\",\n    \"message\": \"Refresh token not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Generate New Tokens",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('accessToken', pm.response.json().access.token)\r",
+									"pm.environment.set('refreshToken', pm.response.json().refresh.token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"{{refreshToken}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/generate/tokens",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"generate",
+								"tokens"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Error: Token Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refreshToken\": \"{{refreshToken}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/generate/tokens",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"generate",
+										"tokens"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-+2O3joBCQrzUXVjZ+qiXdEcRNDY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Jul 2023 06:28:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"type\": \"HttpException\",\n    \"message\": \"Token not found\"\n}"
+						},
+						{
+							"name": "Successful Token Generating",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refreshToken\": \"{{refreshToken}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/generate/tokens",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"generate",
+										"tokens"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1103"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"44f-tpe3tMINDkpk8rlBhP+oPqXMU6I\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Jul 2023 06:36:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiX2lkIjoiNjRiYjc2MzlhZThlMjIwNGExOTBmZjBkIiwiZmlyc3ROYW1lIjoiTWFobW91ZCIsImxhc3ROYW1lIjoiWWFzc2VyIiwiZW1haWwiOiJtbGUubWFobW91ZC55YXNzZXJAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpc0VtYWlsVmVyaWZpZWQiOmZhbHNlLCJpc0RlbGV0ZWQiOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDIzLTA3LTIyVDA2OjI0OjU3LjU2N1oiLCJ1cGRhdGVkQXQiOiIyMDIzLTA3LTIyVDA2OjI0OjU3LjU2N1oifSwiaWF0IjoxNjkwMDA3Nzg3LCJleHAiOjE2OTAwMDk1ODcsInR5cGUiOiJhY2Nlc3MifQ.Ni5YeHF7D9p7cZjFjM1PKvGcEOF5NaVFuJMdO-ncCeE\",\n        \"expires\": \"2023-07-22T07:06:27.429Z\"\n    },\n    \"refresh\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiX2lkIjoiNjRiYjc2MzlhZThlMjIwNGExOTBmZjBkIiwiZmlyc3ROYW1lIjoiTWFobW91ZCIsImxhc3ROYW1lIjoiWWFzc2VyIiwiZW1haWwiOiJtbGUubWFobW91ZC55YXNzZXJAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpc0VtYWlsVmVyaWZpZWQiOmZhbHNlLCJpc0RlbGV0ZWQiOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDIzLTA3LTIyVDA2OjI0OjU3LjU2N1oiLCJ1cGRhdGVkQXQiOiIyMDIzLTA3LTIyVDA2OjI0OjU3LjU2N1oifSwiaWF0IjoxNjkwMDA3Nzg3LCJleHAiOjE2OTA2MTI1ODcsInR5cGUiOiJyZWZyZXNoIn0.zpZ26JCuYtjLbLYhQT6HoOy2RzE3CANlMPIdw12NxxM\",\n        \"expires\": \"2023-07-29T06:36:27.430Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"basheer.s.rajeh@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/forgot-password",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"admin\",\r\n    \"passwordConfirmation\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/reset-password?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDllNjg0Y2YyYjQ0MTE5OGViOWI5ODciLCJpYXQiOjE2ODgxMDUyMjAsImV4cCI6MTY4ODEwODgyMCwidHlwZSI6InJlc2V0UGFzc3dvcmQifQ.O0UuQQQ1m6bYSlkBL5A4HQ_EE7pu9Vz1cci5TUPcwpM",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"reset-password"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDllNjg0Y2YyYjQ0MTE5OGViOWI5ODciLCJpYXQiOjE2ODgxMDUyMjAsImV4cCI6MTY4ODEwODgyMCwidHlwZSI6InJlc2V0UGFzc3dvcmQifQ.O0UuQQQ1m6bYSlkBL5A4HQ_EE7pu9Vz1cci5TUPcwpM"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Email",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/verify-email?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDllNjg0Y2YyYjQ0MTE5OGViOWI5ODciLCJpYXQiOjE2ODgxMDU1NzQsImV4cCI6MTY4ODEwOTE3NCwidHlwZSI6InZlcmlmeUVtYWlsIn0.qj-KF_OlP-9WvCiAGSgMzhVZF-ncrs-MSlG40zRFxJY",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"verify-email"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDllNjg0Y2YyYjQ0MTE5OGViOWI5ODciLCJpYXQiOjE2ODgxMDU1NzQsImV4cCI6MTY4ODEwOTE3NCwidHlwZSI6InZlcmlmeUVtYWlsIn0.qj-KF_OlP-9WvCiAGSgMzhVZF-ncrs-MSlG40zRFxJY"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Verification Email",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/send-verification-email",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"send-verification-email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/649e684cf2b441198eb9b987",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"649e684cf2b441198eb9b987"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"test\",\r\n    \"lastName\": \"test\",\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"test\",\r\n    \"role\": \"User\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"test1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users/649e8074cc7979a061ab346f",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"649e8074cc7979a061ab346f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Profile Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Basheer/Downloads/1_N3oMScC-Z-XSph1v9n4HAQ (1).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/users/649e7fa6cc7979a061ab3462/images/upload",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"649e7fa6cc7979a061ab3462",
+								"images",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update loggedin use profile image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Basheer/Downloads/1_N3oMScC-Z-XSph1v9n4HAQ (1).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/users/me/images/upload",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"me",
+								"images",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/649e8074cc7979a061ab346f",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"649e8074cc7979a061ab346f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get loggedin user data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/me",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Loggedin User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/me",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get All Categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/categories",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "name",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/categories/6328bfc3432cbc22697b5bcc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"categories",
+								"6328bfc3432cbc22697b5bcc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\": \"test\",\r\n    \"code\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/categories",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Makeup\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/categories/649fba1ad1afe4da6d063f46",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"categories",
+								"649fba1ad1afe4da6d063f46"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Basheer/Downloads/1_N3oMScC-Z-XSph1v9n4HAQ.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/categories/649fba1ad1afe4da6d063f46/images/upload",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"categories",
+								"649fba1ad1afe4da6d063f46",
+								"images",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/categories/6328bfc3432cbc22697b5bcc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"categories",
+								"6328bfc3432cbc22697b5bcc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "select",
+									"value": "name, price, sold",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "filter",
+									"value": "dell",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "1,price",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/64a0cef379d172f54b60f722",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"64a0cef379d172f54b60f722"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Top 5 Cheap Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/top-5-cheap",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"top-5-cheap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products Stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/product-stats",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"product-stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\": \"test\",\r\n    \"category\": \"649fd7167e129c09e4dced1a\",\r\n    \"brand\": \"632f18bc1fa03b3435b08b71\",\r\n    \"price\": 123,\r\n    \"quantity\": 100,\r\n    \"priceDiscount\": 0,\r\n    \"size\": \"632f1ae54b4fb1bde5adb6a4\",\r\n    \"color\": \"632f1a454b4fb1bde5adb699\",\r\n    \"tags\": [\"632f29e2b03588aaa2ce0e11\"],\r\n    \"details\": {\r\n        \"brand\": \"abc\",\r\n        \"manufacture\": \"avc\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/products",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sold\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/products/64a0e46b8479d34ae549312b",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"64a0e46b8479d34ae549312b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update/Add Product Main Image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Basheer/Downloads/1_N3oMScC-Z-XSph1v9n4HAQ (1).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/products/64a0e46b8479d34ae549312b/images/main",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"64a0e46b8479d34ae549312b",
+								"images",
+								"main"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update/Add Product Images",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": [
+										"/C:/Users/Basheer/Downloads/elasticsearch-1.png",
+										"/C:/Users/Basheer/Downloads/1_N3oMScC-Z-XSph1v9n4HAQ (1).png"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/products/64a0e46b8479d34ae549312b/images/multiple",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"64a0e46b8479d34ae549312b",
+								"images",
+								"multiple"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/64a0cef379d172f54b60f722",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"64a0cef379d172f54b60f722"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product Main Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/64a0e46b8479d34ae549312b/images/main",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"64a0e46b8479d34ae549312b",
+								"images",
+								"main"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product Sub Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/64a0e46b8479d34ae549312b/images/multiple/64a1254d31bf45aadf5e7d36",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"64a0e46b8479d34ae549312b",
+								"images",
+								"multiple",
+								"64a1254d31bf45aadf5e7d36"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Brand",
+			"item": [
+				{
+					"name": "Create Brand",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Anker\",\r\n    \"code\": \"ank\",\r\n    \"description\": \"Sound Brand\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/brands",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"brands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Brand By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/brands/632f18bc1fa03b3435b08b71",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"brands",
+								"632f18bc1fa03b3435b08b71"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Brands",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/brands",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"brands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Brand",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"ankr\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/brands/64a128b66eefe6b0d2b290d8",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"brands",
+								"64a128b66eefe6b0d2b290d8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Brand",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/brands/64a128b66eefe6b0d2b290d8",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"brands",
+								"64a128b66eefe6b0d2b290d8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Colors",
+			"item": [
+				{
+					"name": "Get Colors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/colors",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"colors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Color",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"blue\",\r\n    \"code\": \"#1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/colors",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"colors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Color By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/colors/632f1a454b4fb1bde5adb699",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"colors",
+								"632f1a454b4fb1bde5adb699"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Color",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"#1230\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/colors/64a12916bf7d7e5423b8a3cb",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"colors",
+								"64a12916bf7d7e5423b8a3cb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Color",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/colors/64a12916bf7d7e5423b8a3cb",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"colors",
+								"64a12916bf7d7e5423b8a3cb"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Size",
+			"item": [
+				{
+					"name": "Create Size",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"small\",\r\n    \"code\": \"s\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/sizes",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"sizes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Size By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/sizes/64a1299b047c785b1380e345",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"sizes",
+								"64a1299b047c785b1380e345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Size",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"s\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/sizes/64a1299b047c785b1380e345",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"sizes",
+								"64a1299b047c785b1380e345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Size",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/sizes/64a1299b047c785b1380e345",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"sizes",
+								"64a1299b047c785b1380e345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sizes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/sizes",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"sizes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tag",
+			"item": [
+				{
+					"name": "Get Tags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/tags",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Tag",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"tech\",\r\n    \"code\": \"tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/tags",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tag By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/tags/64a12a5c5d2b51d65afad53a",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"tags",
+								"64a12a5c5d2b51d65afad53a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Tag",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"tec\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/tags/64a12a5c5d2b51d65afad53a",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"tags",
+								"64a12a5c5d2b51d65afad53a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Tag",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/tags/64a12a5c5d2b51d65afad53a",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"tags",
+								"64a12a5c5d2b51d65afad53a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Review",
+			"item": [
+				{
+					"name": "Get All Reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/reviews",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Reviews",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/product/609ca86ade343d44f53c8220/reviews",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"product",
+										"609ca86ade343d44f53c8220",
+										"reviews"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b12-IQA+4oUKDAHTrQ00Scy8p/NMOMU\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 20 Aug 2021 09:13:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Reviews Found Successfully\",\n    \"reviews\": [\n        {\n            \"_id\": \"611f7236f4529300507723a2\",\n            \"product\": {\n                \"_id\": \"611f6385628e64b6ff96393c\",\n                \"images\": [\n                    \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447042/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/ivz6pdoeo61hwbe5fos4.webp\",\n                    \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447042/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/wkyodmkmsggudaema9gq.webp\",\n                    \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447043/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/xrozurow00olavngx4qz.webp\",\n                    \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447043/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/obqmpjrilapn4hxun1sp.webp\"\n                ],\n                \"price\": 31,\n                \"quantity\": 49,\n                \"mainImage\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629450757/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/tzoeflx66jcqtbzagb3a.webp\",\n                \"name\": \"Lenovo Yoga 9 14ITL5 Laptop - Intel Core i7-1185G7, 14 Inch UHD, 1TB SSD, 16 GB RAM, Integrated Intel Iris Xe Graphics, Windows - Shadow Black\",\n                \"description\": \"1- Brand: Lenovo\\n2- Dimensions: 319.5 x 216.7 x 15.3-16.5 mm\\n3- Weight: 1.44 kg \\n4- Operating system: Windows10 Home\\n5- Hard Disk Capacity: 1 TB \\n6- Hard Disk Interface: SSD\\n7- Memory capacity: 16GB\\n8- 11th Generation Intel Core i7 Processor\\n9- Processor Number:  i7-1185G7 \\n10- Number of Cores: 4\\n11- Max Turbo Frequency: 4.8GHz\\n12- 14 inches UHD (3840x2160) IPS 500nits\\n13- Touchscreen:10-point Multi-touch\\n14- Camera: 720P\\n15- Graphic Card: Integrated Intel Iris Xe Graphics\\n\",\n                \"category\": {\n                    \"_id\": \"611ed87e7ae59e944d27920a\",\n                    \"name\": \"Laptop\",\n                    \"description\": \"This category contains all products related to Laptops, it's components and accessories\",\n                    \"image\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629411453/EcommerceAPI/Category/Laptop/hqbknfppz8src5szz2w9.webp\"\n                },\n                \"seller\": {\n                    \"_id\": \"611f62e28fa5d0a76cefbc96\",\n                    \"name\": \"Basheer Rajeh\",\n                    \"email\": \"basheer.s.rajeh@gmail.com\",\n                    \"companyName\": \"Souq\",\n                    \"address\": \"Cairo - Egypt\",\n                    \"phone\": \"01541258221\",\n                    \"profileImage\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629446881/EcommerceAPI/Users/BasheerRajeh/kfexgexhxzleszejxrkn.webp\"\n                }\n            },\n            \"user\": {\n                \"_id\": \"611f62e28fa5d0a76cefbc96\",\n                \"name\": \"Basheer Rajeh\"\n            },\n            \"review\": \"Amazing Product!!\",\n            \"rating\": 5,\n            \"createdAt\": \"2021-08-20T09:13:26.697Z\",\n            \"updatedAt\": \"2021-08-20T09:13:26.697Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Review",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/reviews/64b22a8c2da17cb3482090ed",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"reviews",
+								"64b22a8c2da17cb3482090ed"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Review",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/product/611f6385628e64b6ff96393c/reviews/611f7236f4529300507723a2",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"product",
+										"611f6385628e64b6ff96393c",
+										"reviews",
+										"611f7236f4529300507723a2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ad2-pIEHtvDM4WN9e/ti9mpaNV5mQ0Y\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 20 Aug 2021 09:15:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Review Found Successfully\",\n    \"review\": {\n        \"_id\": \"611f7236f4529300507723a2\",\n        \"product\": {\n            \"images\": [\n                \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447042/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/ivz6pdoeo61hwbe5fos4.webp\",\n                \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447042/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/wkyodmkmsggudaema9gq.webp\",\n                \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447043/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/xrozurow00olavngx4qz.webp\",\n                \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447043/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/obqmpjrilapn4hxun1sp.webp\"\n            ],\n            \"price\": 31,\n            \"quantity\": 49,\n            \"mainImage\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629450757/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/tzoeflx66jcqtbzagb3a.webp\",\n            \"name\": \"Lenovo Yoga 9 14ITL5 Laptop - Intel Core i7-1185G7, 14 Inch UHD, 1TB SSD, 16 GB RAM, Integrated Intel Iris Xe Graphics, Windows - Shadow Black\",\n            \"description\": \"1- Brand: Lenovo\\n2- Dimensions: 319.5 x 216.7 x 15.3-16.5 mm\\n3- Weight: 1.44 kg \\n4- Operating system: Windows10 Home\\n5- Hard Disk Capacity: 1 TB \\n6- Hard Disk Interface: SSD\\n7- Memory capacity: 16GB\\n8- 11th Generation Intel Core i7 Processor\\n9- Processor Number:  i7-1185G7 \\n10- Number of Cores: 4\\n11- Max Turbo Frequency: 4.8GHz\\n12- 14 inches UHD (3840x2160) IPS 500nits\\n13- Touchscreen:10-point Multi-touch\\n14- Camera: 720P\\n15- Graphic Card: Integrated Intel Iris Xe Graphics\\n\",\n            \"category\": {\n                \"name\": \"Laptop\",\n                \"description\": \"This category contains all products related to Laptops, it's components and accessories\",\n                \"image\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629411453/EcommerceAPI/Category/Laptop/hqbknfppz8src5szz2w9.webp\"\n            },\n            \"seller\": {\n                \"name\": \"Basheer Rajeh\",\n                \"email\": \"basheer.s.rajeh@gmail.com\",\n                \"companyName\": \"Souq\",\n                \"address\": \"Aleppo - Syria\",\n                \"phone\": \"00963937555407\",\n                \"profileImage\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629446881/EcommerceAPI/Users/BasheerRajeh/kfexgexhxzleszejxrkn.webp\"\n            },\n            \"id\": \"611f6385628e64b6ff96393c\"\n        },\n        \"user\": {\n            \"name\": \"Basheer Rajeh\"\n        },\n        \"review\": \"Amazing Product!!\",\n        \"rating\": 5,\n        \"createdAt\": \"2021-08-20T09:13:26.697Z\",\n        \"updatedAt\": \"2021-08-20T09:13:26.697Z\",\n        \"__v\": 0,\n        \"id\": \"611f7236f4529300507723a2\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Add Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": \"64a0e46b8479d34ae549312b\",\r\n    \"review\": \"euuuu\",\r\n    \"rating\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/reviews",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Review",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"review\": \"Amazing Product!!\",\r\n    \"rating\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/product/611f6385628e64b6ff96393c/reviews",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"product",
+										"611f6385628e64b6ff96393c",
+										"reviews"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3a-4QUmHpYZsWY4Z5nU4IwzOzddWgI\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 20 Aug 2021 09:13:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Review Created Successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/reviews/64b23256223b5a92a59db0ae",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"reviews",
+								"64b23256223b5a92a59db0ae"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/reviews/64b23256223b5a92a59db0ae",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"reviews",
+								"64b23256223b5a92a59db0ae"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Add Items To Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": \"64a0e46b8479d34ae549312b\",\r\n    \"quantity\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/carts",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Items To Cart",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productId\": \"611f6385628e64b6ff96393c\",\r\n    \"quantity\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/cart",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ab2-2UniLsSH/OdTUqwkMgW7n34QyXw\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 22 Aug 2021 08:56:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Item Added To Cart Successfully\",\n    \"cart\": {\n        \"email\": \"basheer.s.rajeh@gmail.com\",\n        \"items\": [\n            {\n                \"_id\": \"61221141f34a829cdf7ca542\",\n                \"product\": {\n                    \"images\": [\n                        \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447042/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/ivz6pdoeo61hwbe5fos4.webp\",\n                        \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447042/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/wkyodmkmsggudaema9gq.webp\",\n                        \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447043/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/xrozurow00olavngx4qz.webp\",\n                        \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447043/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/obqmpjrilapn4hxun1sp.webp\"\n                    ],\n                    \"price\": 3100,\n                    \"isOutOfStock\": false,\n                    \"mainImage\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629450757/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/tzoeflx66jcqtbzagb3a.webp\",\n                    \"name\": \"Lenovo Yoga 9 14ITL5 Laptop - Intel Core i7-1185G7, 14 Inch UHD, 1TB SSD, 16 GB RAM, Integrated Intel Iris Xe Graphics, Windows - Shadow Black\",\n                    \"description\": \"1- Brand: Lenovo\\n2- Dimensions: 319.5 x 216.7 x 15.3-16.5 mm\\n3- Weight: 1.44 kg \\n4- Operating system: Windows10 Home\\n5- Hard Disk Capacity: 1 TB \\n6- Hard Disk Interface: SSD\\n7- Memory capacity: 16GB\\n8- 11th Generation Intel Core i7 Processor\\n9- Processor Number:  i7-1185G7 \\n10- Number of Cores: 4\\n11- Max Turbo Frequency: 4.8GHz\\n12- 14 inches UHD (3840x2160) IPS 500nits\\n13- Touchscreen:10-point Multi-touch\\n14- Camera: 720P\\n15- Graphic Card: Integrated Intel Iris Xe Graphics\\n\",\n                    \"category\": {\n                        \"name\": \"Laptop\",\n                        \"description\": \"This category contains all products related to Laptops, it's components and accessories\",\n                        \"image\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629411453/EcommerceAPI/Category/Laptop/hqbknfppz8src5szz2w9.webp\"\n                    },\n                    \"priceDiscount\": 16,\n                    \"seller\": {\n                        \"name\": \"Basheer Rajeh\",\n                        \"email\": \"basheer.s.rajeh@gmail.com\",\n                        \"companyName\": \"Souq\",\n                        \"address\": \"Cairo - Egypt\",\n                        \"phone\": \"01541258221\",\n                        \"profileImage\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629446881/EcommerceAPI/Users/BasheerRajeh/kfexgexhxzleszejxrkn.webp\"\n                    },\n                    \"id\": \"611f6385628e64b6ff96393c\"\n                },\n                \"totalQuantity\": 2,\n                \"totalPrice\": 6200\n            }\n        ],\n        \"totalQuantity\": 2,\n        \"totalPrice\": 6200\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/carts",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Cart",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/cart",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"aaa-zDoxtCWANeSMf0/pjB9T760LxTU\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 22 Aug 2021 08:59:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Cart Found Successfully\",\n    \"cart\": {\n        \"email\": \"basheer.s.rajeh@gmail.com\",\n        \"items\": [\n            {\n                \"_id\": \"61221141f34a829cdf7ca542\",\n                \"product\": {\n                    \"images\": [\n                        \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447042/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/ivz6pdoeo61hwbe5fos4.webp\",\n                        \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447042/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/wkyodmkmsggudaema9gq.webp\",\n                        \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447043/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/xrozurow00olavngx4qz.webp\",\n                        \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447043/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/obqmpjrilapn4hxun1sp.webp\"\n                    ],\n                    \"price\": 3100,\n                    \"isOutOfStock\": false,\n                    \"mainImage\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629450757/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/tzoeflx66jcqtbzagb3a.webp\",\n                    \"name\": \"Lenovo Yoga 9 14ITL5 Laptop - Intel Core i7-1185G7, 14 Inch UHD, 1TB SSD, 16 GB RAM, Integrated Intel Iris Xe Graphics, Windows - Shadow Black\",\n                    \"description\": \"1- Brand: Lenovo\\n2- Dimensions: 319.5 x 216.7 x 15.3-16.5 mm\\n3- Weight: 1.44 kg \\n4- Operating system: Windows10 Home\\n5- Hard Disk Capacity: 1 TB \\n6- Hard Disk Interface: SSD\\n7- Memory capacity: 16GB\\n8- 11th Generation Intel Core i7 Processor\\n9- Processor Number:  i7-1185G7 \\n10- Number of Cores: 4\\n11- Max Turbo Frequency: 4.8GHz\\n12- 14 inches UHD (3840x2160) IPS 500nits\\n13- Touchscreen:10-point Multi-touch\\n14- Camera: 720P\\n15- Graphic Card: Integrated Intel Iris Xe Graphics\\n\",\n                    \"category\": {\n                        \"name\": \"Laptop\",\n                        \"description\": \"This category contains all products related to Laptops, it's components and accessories\",\n                        \"image\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629411453/EcommerceAPI/Category/Laptop/hqbknfppz8src5szz2w9.webp\"\n                    },\n                    \"priceDiscount\": 16,\n                    \"seller\": {\n                        \"name\": \"Basheer Rajeh\",\n                        \"email\": \"basheer.s.rajeh@gmail.com\",\n                        \"companyName\": \"Souq\",\n                        \"address\": \"Cairo - Egypt\",\n                        \"phone\": \"01541258221\",\n                        \"profileImage\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629446881/EcommerceAPI/Users/BasheerRajeh/kfexgexhxzleszejxrkn.webp\"\n                    },\n                    \"id\": \"611f6385628e64b6ff96393c\"\n                },\n                \"totalQuantity\": 2,\n                \"totalPrice\": 6200\n            }\n        ],\n        \"totalQuantity\": 2,\n        \"totalPrice\": 6200\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Increase Product Quantity By One",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": \"64a0e46b8479d34ae549312b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/carts/increase-one",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"carts",
+								"increase-one"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Increase Product Quantity By One",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productId\": \"611f6385628e64b6ff96393c\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/cart/increase-one",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"increase-one"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"acb-dIqg9atqOcw2+r+pNGcmh1HbrNQ\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 22 Aug 2021 11:06:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Item Increased By One In Cart Successfully\",\n    \"cart\": {\n        \"email\": \"basheer.s.rajeh@gmail.com\",\n        \"items\": [\n            {\n                \"_id\": \"61221141f34a829cdf7ca542\",\n                \"product\": {\n                    \"images\": [\n                        \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447042/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/ivz6pdoeo61hwbe5fos4.webp\",\n                        \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447042/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/wkyodmkmsggudaema9gq.webp\",\n                        \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447043/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/xrozurow00olavngx4qz.webp\",\n                        \"https://res.cloudinary.com/dknma8cck/image/upload/v1629447043/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/obqmpjrilapn4hxun1sp.webp\"\n                    ],\n                    \"price\": 3100,\n                    \"isOutOfStock\": false,\n                    \"mainImage\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629450757/EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7%2C14InchUHD%2C1TBSSD%2C16GBRAM%2CIntegratedIntelIrisXeGraphics%2CWindows-ShadowBlack/tzoeflx66jcqtbzagb3a.webp\",\n                    \"name\": \"Lenovo Yoga 9 14ITL5 Laptop - Intel Core i7-1185G7, 14 Inch UHD, 1TB SSD, 16 GB RAM, Integrated Intel Iris Xe Graphics, Windows - Shadow Black\",\n                    \"description\": \"1- Brand: Lenovo\\n2- Dimensions: 319.5 x 216.7 x 15.3-16.5 mm\\n3- Weight: 1.44 kg \\n4- Operating system: Windows10 Home\\n5- Hard Disk Capacity: 1 TB \\n6- Hard Disk Interface: SSD\\n7- Memory capacity: 16GB\\n8- 11th Generation Intel Core i7 Processor\\n9- Processor Number:  i7-1185G7 \\n10- Number of Cores: 4\\n11- Max Turbo Frequency: 4.8GHz\\n12- 14 inches UHD (3840x2160) IPS 500nits\\n13- Touchscreen:10-point Multi-touch\\n14- Camera: 720P\\n15- Graphic Card: Integrated Intel Iris Xe Graphics\\n\",\n                    \"category\": {\n                        \"name\": \"Laptop\",\n                        \"description\": \"This category contains all products related to Laptops, it's components and accessories\",\n                        \"image\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629411453/EcommerceAPI/Category/Laptop/hqbknfppz8src5szz2w9.webp\"\n                    },\n                    \"priceDiscount\": 16,\n                    \"seller\": {\n                        \"name\": \"Basheer Rajeh\",\n                        \"email\": \"basheer.s.rajeh@gmail.com\",\n                        \"companyName\": \"Souq\",\n                        \"address\": \"Cairo - Egypt\",\n                        \"phone\": \"01541258221\",\n                        \"profileImage\": \"https://res.cloudinary.com/dknma8cck/image/upload/v1629446881/EcommerceAPI/Users/BasheerRajeh/kfexgexhxzleszejxrkn.webp\"\n                    },\n                    \"id\": \"611f6385628e64b6ff96393c\"\n                },\n                \"totalProductQuantity\": 3,\n                \"totalProductPrice\": 9300\n            }\n        ],\n        \"totalQuantity\": 3,\n        \"totalPrice\": 9300\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Reduce Product Quantity By One",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": \"64a0e46b8479d34ae549312b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/carts/reduce-one",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"carts",
+								"reduce-one"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product From Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product\": \"64a0e46b8479d34ae549312b\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/carts/delete-product",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"carts",
+								"delete-product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/carts",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Count in Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/carts/64a0e46b8479d34ae549312b/count",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"carts",
+								"64a0e46b8479d34ae549312b",
+								"count"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Create New Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Toukh - Egypt\",\r\n    \"city\": \"Toukh\",\r\n    \"country\": \"Egypt\",\r\n    \"postalCode\": \"11311\",\r\n    \"paymentMethod\": \"card\",\r\n    \"phone\": \"01004468937\",\r\n    \"cardNumber\": \"4242424242424242\",\r\n    \"expMonth\": 4,\r\n    \"expYear\": 2024,\r\n    \"cvc\": \"247\",\r\n    \"status\": \"Not Processed\",\r\n    \"taxPrice\": 100,\r\n    \"shippingPrice\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/orders",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create New Order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"address\": \"Toukh - Egypt\",\r\n    \"city\": \"Toukh\",\r\n    \"country\": \"Egypt\",\r\n    \"postalCode\": \"11311\",\r\n    \"paymentMethod\": \"card\",\r\n    \"phone\": \"01004468937\",\r\n    \"cardNumber\": \"4242424242424242\",\r\n    \"expMonth\": 4,\r\n    \"expYear\": 2024,\r\n    \"cvc\": \"247\",\r\n    \"status\": \"Not Processed\",\r\n    \"taxPrice\": 100,\r\n    \"shippingPrice\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/orders",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "911"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"38f-BQmfEdWuaxH3IgbhbUVdVc/aX+Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Jul 2023 14:43:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"products\": [\n        {\n            \"product\": \"64a0e46b8479d34ae549312b\",\n            \"quantity\": 4,\n            \"price\": 123,\n            \"total\": 492,\n            \"_id\": \"64ba999720837e82cbade731\",\n            \"createdAt\": \"2023-07-21T14:43:45.238Z\",\n            \"updatedAt\": \"2023-07-21T14:43:45.238Z\"\n        }\n    ],\n    \"user\": {\n        \"_id\": \"64a0e27b25f40927944f412a\",\n        \"firstName\": \"Admin\",\n        \"lastName\": \"Admin\",\n        \"email\": \"admin@admin.com\",\n        \"password\": \"$2a$10$bbUx7MKhF8r5kQsdtVoZS.IgE20QmmZkXCnRIYXJ/TusoqnssI9Xu\",\n        \"role\": \"Admin\",\n        \"isEmailVerified\": true,\n        \"isDeleted\": false,\n        \"createdAt\": \"2023-07-02T02:35:39.438Z\",\n        \"updatedAt\": \"2023-07-02T02:35:39.438Z\"\n    },\n    \"totalPrice\": 492,\n    \"isPaid\": true,\n    \"isDelivered\": false,\n    \"paymentMethod\": \"card\",\n    \"paymentStripeId\": \"ch_3NWKYsCiDXQhJi1a0FPlEXDh\",\n    \"taxPrice\": 100,\n    \"shippingPrice\": 100,\n    \"phone\": \"01004468937\",\n    \"status\": \"Not Processed\",\n    \"address\": \"Toukh - Egypt\",\n    \"city\": \"Toukh\",\n    \"country\": \"Egypt\",\n    \"postalCode\": \"11311\",\n    \"_id\": \"64ba99a120837e82cbade743\",\n    \"createdAt\": \"2023-07-21T14:43:45.239Z\",\n    \"updatedAt\": \"2023-07-21T14:43:45.239Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User Orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/orders",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User Orders",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/orders",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1151"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"47f-PBllsdn7p2DmRHTdNPqELGn5cKI\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Jul 2023 14:32:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"successfulOrdersFound\",\n    \"statusCode\": 200,\n    \"orders\": {\n        \"docs\": [\n            {\n                \"_id\": \"64ba3c126056729cc3f8b731\",\n                \"products\": [\n                    {\n                        \"product\": \"64a0e46b8479d34ae549312b\",\n                        \"quantity\": 2,\n                        \"price\": 123,\n                        \"total\": 246,\n                        \"_id\": \"64b35c08e85a48fdb692eee8\",\n                        \"createdAt\": \"2023-07-21T08:04:34.510Z\",\n                        \"updatedAt\": \"2023-07-21T08:04:34.510Z\"\n                    }\n                ],\n                \"user\": {\n                    \"_id\": \"64a0e27b25f40927944f412a\",\n                    \"firstName\": \"Admin\",\n                    \"lastName\": \"Admin\",\n                    \"email\": \"admin@admin.com\",\n                    \"password\": \"$2a$10$bbUx7MKhF8r5kQsdtVoZS.IgE20QmmZkXCnRIYXJ/TusoqnssI9Xu\",\n                    \"role\": \"Admin\",\n                    \"isEmailVerified\": true,\n                    \"isDeleted\": false,\n                    \"createdAt\": \"2023-07-02T02:35:39.438Z\",\n                    \"updatedAt\": \"2023-07-02T02:35:39.438Z\"\n                },\n                \"totalPrice\": 246,\n                \"isPaid\": true,\n                \"isDelivered\": false,\n                \"paymentMethod\": \"card\",\n                \"paymentStripeId\": \"ch_3NWEKaCiDXQhJi1a1DyPxR8q\",\n                \"taxPrice\": 100,\n                \"shippingPrice\": 100,\n                \"phone\": \"01004468937\",\n                \"status\": \"Not Processed\",\n                \"address\": \"Toukh - Egypt\",\n                \"city\": \"Toukh\",\n                \"country\": \"Egypt\",\n                \"postalCode\": \"11311\",\n                \"createdAt\": \"2023-07-21T08:04:34.510Z\",\n                \"updatedAt\": \"2023-07-21T08:04:34.510Z\"\n            }\n        ],\n        \"totalDocs\": 1,\n        \"offset\": 0,\n        \"limit\": 10,\n        \"totalPages\": 1,\n        \"page\": 1,\n        \"pagingCounter\": 1,\n        \"hasPrevPage\": false,\n        \"hasNextPage\": false,\n        \"prevPage\": null,\n        \"nextPage\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/orders/64ba3c126056729cc3f8b731",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders",
+								"64ba3c126056729cc3f8b731"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Order",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/orders/64ba3c126056729cc3f8b731",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"orders",
+										"64ba3c126056729cc3f8b731"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"43-UHoboItOrEXqDFH9oy+xyvm6MiY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Jul 2023 14:36:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"type\": \"HttpException\",\n    \"message\": \"No data found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Cancel Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/orders/64ba99a120837e82cbade743/cancel",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders",
+								"64ba99a120837e82cbade743",
+								"cancel"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cancel Order",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/orders/64ba99a120837e82cbade743/cancel",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"orders",
+										"64ba99a120837e82cbade743",
+										"cancel"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-iz5V6g8f4HmqahFbqsveJskcSTw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Jul 2023 14:44:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"successfulOrderCancel\",\n    \"statusCode\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Order Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"Processing\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/orders/64ba3c126056729cc3f8b731/status",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders",
+								"64ba3c126056729cc3f8b731",
+								"status"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Order Status",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"status\": \"Processing\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/orders/64ba3c126056729cc3f8b731/status",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"orders",
+										"64ba3c126056729cc3f8b731",
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "70"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"46-s4j8yuclyl/ym0y9HfBEWSSPmfw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Jul 2023 14:34:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"successfulStatusUpdate\",\n    \"statusCode\": 200\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Favorite",
+			"item": [
+				{
+					"name": "Add Products To Favorite List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product\": \"64a0e46b8479d34ae549312b\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/favorites",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"favorites"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Products To Favorite List",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\": \"6123dab951ff329fed1bc794\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/favorite",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"favorite"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "75"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4b-/UA7rqADTJDOvETJp0MfBJfoMaE\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Sep 2021 20:17:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Product added to favorite list successfully.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Favorite List Products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/favorites",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"favorites"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Favorite List Products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/favorite",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"favorite"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "215"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d7-sbC9JniTKxEt+pfpNQJW6yAECfQ\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Sep 2021 20:16:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Favorite list successfully retrieved.\",\n    \"products\": {\n        \"_id\": \"613a6902c5fcab984501f7ee\",\n        \"user\": \"611d0cf2ab79f9bb0c388234\",\n        \"products\": [\n            \"611f6385628e64b6ff96393c\",\n            \"6123418c2ee9a1ae2b23a29e\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Product From Favorite List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/favorites/64b227b600e941019d424edb",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"favorites",
+								"64b227b600e941019d424edb"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Product From Favorite List",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/favorite/6123dab951ff329fed1bc794",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"favorite",
+										"6123dab951ff329fed1bc794"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f-yZhXx5BFzbrBvUVrNbPAsl6MNKc\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Sep 2021 20:19:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Product deleted from favorite list successfully.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Discount",
+			"item": [
+				{
+					"name": "Find Discount Amount",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/discount/find",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"discount",
+								"find"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Find Discount Amount",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/discount/find",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"discount",
+										"find"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "72"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"48-CnNEKro1MXoxMCPNGTxlVNkWW2w\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Sep 2021 08:58:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Discount found successfully.\",\n    \"discount\": 7\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Discount Codes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/discount",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"discount"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Discount Codes",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/discount",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"discount"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "331"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14b-bzJWZ0ieWPWxEKXVN3qKR/R72BQ\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Sep 2021 20:34:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Discount codes found successfully.\",\n    \"codes\": [\n        {\n            \"_id\": \"613a6fa16578caa1a2a7fd90\",\n            \"code\": \"bbrgVdTh9i\",\n            \"discount\": \"8\",\n            \"available\": 94\n        },\n        {\n            \"_id\": \"613a6fe06578caa1a2a7fd9a\",\n            \"code\": \"xvgVxIV0LJ\",\n            \"discount\": \"29\",\n            \"available\": 92\n        },\n        {\n            \"_id\": \"613a6fe36578caa1a2a7fd9d\",\n            \"code\": \"KqjNGwRsJY\",\n            \"discount\": \"7\",\n            \"available\": 41\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Generate Discount Code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codeLength\": 10,\n    \"discountStart\": 5,\n    \"discountEnd\": 30,\n    \"availableStart\": 1,\n    \"availableEnd\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/discount/generate",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"discount",
+								"generate"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Generate Discount Code",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"codeLength\": 10,\n    \"discountStart\": 5,\n    \"discountEnd\": 30,\n    \"availableStart\": 1,\n    \"availableEnd\": 100\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/discount/generate",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"discount",
+										"generate"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "168"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a8-utEEZuC+XwdItrZ3krpL2MymWJ4\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Sep 2021 20:33:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Discount code generated successfully.\",\n    \"discountCode\": {\n        \"code\": \"bbrgVdTh9i\",\n        \"discount\": \"8\",\n        \"available\": 94,\n        \"_id\": \"613a6fa16578caa1a2a7fd90\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Verify Discount Code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"discountCode\": \"KqjNGwRsJY\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/discount/verify",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"discount",
+								"verify"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Verify Discount Code",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"discountCode\": \"bbrgVdTh9i\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/discount/verify",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"discount",
+										"verify"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "101"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"65-4qp0qjYbsAWfzKQJOWzgTsYEqes\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Sep 2021 20:36:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Discount code verification completed successfully.\",\n    \"code\": \"bbrgVdTh9i\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Discount Code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/discount/613d100aeb4da4ae14e5a7c6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"discount",
+								"613d100aeb4da4ae14e5a7c6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Discount Code",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/discount/613d100aeb4da4ae14e5a7c6",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"discount",
+										"613d100aeb4da4ae14e5a7c6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "66"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"42-HI+z2db5fc1+zcZamV8MlE0rKeQ\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 12 Sep 2021 16:48:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Discount code deleted successfully.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Cancel Discount Code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/discount/cancel",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"discount",
+								"cancel"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cancel Discount Code",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/discount/cancel",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"discount",
+										"cancel"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f-C3C8ajzNwcYyWTw/Cls7h20dGaQ\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 12 Sep 2021 17:31:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"Success\",\n    \"message\": \"Discount code cancelled from order successfully.\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
